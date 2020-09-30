@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+  <title>Type Right/Wrong</title>
+</head>
+<body>
+  <main>
+    <div class="content">
+      <h1>Type something, but don't #$% etc</h1>
+      <form onsubmit="checkInputValue();return false" class="form">
+        <input type="text" id="text" placeholder="Type something">
+        <button type="submit" class="button">Check</button>
+      </form>
+      <div class="words">
+        <div class="question">Is it correct?</div>
+        <div class="answer" id="validMessage"></div>
+      </div>
+    </div>
+	</main>
+  <script type="text/javascript">
+    let arrayOfSymbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '*', '?', '>', '<', '~']
+    let validMessage = document.getElementById("validMessage");
+    function checkInputValue() {
+      let textValue = document.getElementById("text").value;
+      let arrayOfEqualsSymbols = setEqualsSymbols(textValue);
+      if (arrayOfEqualsSymbols.length <= 3) {
+        validMessage.style.backgroundColor = '#67dc60'
+        validMessage.innerHTML = 'It is!'
+      } else {
+        validMessage.innerHTML = 'No way!'
+        validMessage.style.backgroundColor = '#de3636'
+      }
+    }
+
+    function setEqualsSymbols(textValue) {
+      let arrayOfEqualsSymbols = []
+      for(let i = 0; i < textValue.length; i++) {
+      for (let index = 0; index < arrayOfSymbols.length; index++) {
+        if(textValue[i] == arrayOfSymbols[index]) {
+          arrayOfEqualsSymbols.push(arrayOfSymbols[index])
+        }
+      }
+      }
+      return arrayOfEqualsSymbols;
+    }
+  </script>
+</body>
+</html>
